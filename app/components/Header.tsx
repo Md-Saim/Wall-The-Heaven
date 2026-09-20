@@ -34,11 +34,13 @@ export default function Header({
 
   return (
     <header
+      className="site-header-container"
       style={{
         position: 'relative',
         zIndex: 40,
         width: '100%',
-        padding: '16px 24px',
+        maxWidth: '100vw',
+        boxSizing: 'border-box',
         borderBottom: '1px solid #141414',
         background: 'rgba(0, 0, 0, 0.90)',
         backdropFilter: 'blur(20px)',

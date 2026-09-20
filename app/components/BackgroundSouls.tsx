@@ -63,55 +63,55 @@ export default function BackgroundSouls() {
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('resize', handleResize);
 
-    // Initialize 35 Dark Glossy Bubbles with Golden Highlights
-    const soulCount = Math.min(40, Math.floor(window.innerWidth / 35));
+    const isMobileDevice = window.innerWidth <= 768;
+
+    // Mobile: 6-8 bubbles; Desktop: up to 35 bubbles
+    const soulCount = isMobileDevice ? 6 : Math.min(35, Math.floor(window.innerWidth / 40));
     const souls: SoulParticle[] = [];
 
     for (let i = 0; i < soulCount; i++) {
       souls.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 18 + 8, // 8px to 26px
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: -(Math.random() * 0.45 + 0.15), // upward drift
-        alpha: Math.random() * 0.3 + 0.2,
+        radius: isMobileDevice ? Math.random() * 12 + 6 : Math.random() * 18 + 8,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: -(Math.random() * 0.35 + 0.1), // gentle upward drift
+        alpha: Math.random() * 0.25 + 0.15,
         pulseSpeed: Math.random() * 0.015 + 0.01,
         pulseOffset: Math.random() * Math.PI * 2,
         highlightAngle: Math.random() * Math.PI * 2,
       });
     }
 
-    // Preload PC Game Emblems for background dissolution
-    const emblemSources = [
-      '/game-logos/cs2.svg',
+    // Preload dissolved game emblems (only 3 on mobile to maximize GPU fillrate)
+    const allEmblems = [
       '/game-logos/cyberpunk.svg',
       '/game-logos/elden-ring.svg',
       '/game-logos/valorant.svg',
+      '/game-logos/cs2.svg',
       '/game-logos/steam.svg',
-      '/game-logos/gtav.svg',
       '/game-logos/witcher.svg',
-      '/game-logos/unreal.svg',
-      '/game-logos/doom.svg',
-      '/game-logos/dark-souls.svg',
     ];
 
+    const emblemSources = isMobileDevice ? allEmblems.slice(0, 3) : allEmblems;
     const emblems: GameEmblem[] = [];
+
     emblemSources.forEach((src) => {
       const img = new Image();
       img.src = src;
       img.onload = () => {
         emblems.push({
           img,
-          x: Math.random() * (width - 240) + 120,
-          y: Math.random() * (height - 240) + 120,
-          size: Math.random() * 80 + 150, // 150px to 230px
-          vx: (Math.random() - 0.5) * 0.12,
-          vy: (Math.random() - 0.5) * 0.1,
+          x: Math.random() * (width - 160) + 80,
+          y: Math.random() * (height - 160) + 80,
+          size: isMobileDevice ? Math.random() * 50 + 100 : Math.random() * 80 + 150,
+          vx: (Math.random() - 0.5) * 0.1,
+          vy: (Math.random() - 0.5) * 0.08,
           rotation: Math.random() * Math.PI * 2,
-          vRot: (Math.random() - 0.5) * 0.001,
-          alpha: Math.random() * 0.04 + 0.035, // Very subtle, dissolved (0.035 to 0.075)
-          targetAlpha: Math.random() * 0.05 + 0.035,
-          alphaSpeed: Math.random() * 0.0006 + 0.0003,
+          vRot: (Math.random() - 0.5) * 0.0008,
+          alpha: Math.random() * 0.035 + 0.03,
+          targetAlpha: Math.random() * 0.04 + 0.03,
+          alphaSpeed: Math.random() * 0.0005 + 0.0002,
         });
       };
     });
@@ -122,11 +122,11 @@ export default function BackgroundSouls() {
       frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // Pure Black Base with Subtle Ambient Center Vignette
+      // Pure Black Base
       ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, width, height);
 
-      // 1. Draw Dissolved PC Game Logos
+      // 1. Draw Dissolved Emblems
       emblems.forEach((emb) => {
         emb.x += emb.vx;
         emb.y += emb.vy;
@@ -137,12 +137,6 @@ export default function BackgroundSouls() {
         if (emb.y < -emb.size) emb.y = height + emb.size;
         if (emb.y > height + emb.size) emb.y = -emb.size;
 
-        if (Math.abs(emb.alpha - emb.targetAlpha) < 0.002) {
-          emb.targetAlpha = Math.random() * 0.04 + 0.03;
-        } else {
-          emb.alpha += (emb.targetAlpha - emb.alpha) * emb.alphaSpeed;
-        }
-
         ctx.save();
         ctx.globalAlpha = emb.alpha;
         ctx.translate(emb.x, emb.y);
@@ -151,7 +145,7 @@ export default function BackgroundSouls() {
         ctx.restore();
       });
 
-      // 2. Draw Moving Glassy Bubbles with Golden Specular Highlights
+      // 2. Draw Moving Glassy Bubbles
       souls.forEach((soul) => {
         soul.x += soul.vx;
         soul.y += soul.vy;
@@ -163,56 +157,60 @@ export default function BackgroundSouls() {
         if (soul.x < -soul.radius * 2) soul.x = width + soul.radius * 2;
         if (soul.x > width + soul.radius * 2) soul.x = -soul.radius * 2;
 
-        // Gentle Mouse Repulsion
-        const dx = mouse.x - soul.x;
-        const dy = mouse.y - soul.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius && dist > 0) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          soul.x -= (dx / dist) * force * 2.5;
-          soul.y -= (dy / dist) * force * 2.5;
+        // Gentle Mouse Repulsion (desktop only)
+        if (!isMobileDevice && mouse.x > 0) {
+          const dx = mouse.x - soul.x;
+          const dy = mouse.y - soul.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius && dist > 0) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            soul.x -= (dx / dist) * force * 2;
+            soul.y -= (dy / dist) * force * 2;
+          }
         }
 
         const pulse = Math.sin(frame * soul.pulseSpeed + soul.pulseOffset);
-        const r = soul.radius + pulse * 1.2;
+        const r = soul.radius + pulse * 1.1;
 
         ctx.save();
-        ctx.globalAlpha = soul.alpha + pulse * 0.1;
+        ctx.globalAlpha = soul.alpha + pulse * 0.08;
 
         // Outer Dark Bubble Glow
         const bubbleGrad = ctx.createRadialGradient(
           soul.x, soul.y, r * 0.2,
           soul.x, soul.y, r
         );
-        bubbleGrad.addColorStop(0, 'rgba(30, 30, 30, 0.2)');
-        bubbleGrad.addColorStop(0.7, 'rgba(15, 15, 15, 0.6)');
-        bubbleGrad.addColorStop(1, 'rgba(250, 204, 21, 0.18)'); // Golden edge rim
+        bubbleGrad.addColorStop(0, 'rgba(25, 25, 25, 0.2)');
+        bubbleGrad.addColorStop(0.7, 'rgba(12, 12, 12, 0.55)');
+        bubbleGrad.addColorStop(1, 'rgba(250, 204, 21, 0.18)');
 
         ctx.fillStyle = bubbleGrad;
         ctx.beginPath();
         ctx.arc(soul.x, soul.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Delicate Golden Rim Stroke
-        ctx.strokeStyle = 'rgba(250, 204, 21, 0.25)';
+        // Golden Rim
+        ctx.strokeStyle = 'rgba(250, 204, 21, 0.22)';
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Specular Glint (Glossy Reflection on top-left of bubble)
-        const glintX = soul.x - r * 0.35;
-        const glintY = soul.y - r * 0.35;
-        const glintGrad = ctx.createRadialGradient(
-          glintX, glintY, 0,
-          glintX, glintY, r * 0.45
-        );
-        glintGrad.addColorStop(0, 'rgba(255, 255, 255, 0.65)');
-        glintGrad.addColorStop(0.4, 'rgba(250, 204, 21, 0.3)');
-        glintGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        // Specular Glint (desktop only for performance)
+        if (!isMobileDevice) {
+          const glintX = soul.x - r * 0.35;
+          const glintY = soul.y - r * 0.35;
+          const glintGrad = ctx.createRadialGradient(
+            glintX, glintY, 0,
+            glintX, glintY, r * 0.45
+          );
+          glintGrad.addColorStop(0, 'rgba(255, 255, 255, 0.6)');
+          glintGrad.addColorStop(0.4, 'rgba(250, 204, 21, 0.25)');
+          glintGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
-        ctx.fillStyle = glintGrad;
-        ctx.beginPath();
-        ctx.arc(glintX, glintY, r * 0.45, 0, Math.PI * 2);
-        ctx.fill();
+          ctx.fillStyle = glintGrad;
+          ctx.beginPath();
+          ctx.arc(glintX, glintY, r * 0.45, 0, Math.PI * 2);
+          ctx.fill();
+        }
 
         ctx.restore();
       });
@@ -241,6 +239,8 @@ export default function BackgroundSouls() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 0,
+        willChange: 'transform',
+        transform: 'translateZ(0)',
       }}
     />
   );

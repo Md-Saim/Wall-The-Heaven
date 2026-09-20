@@ -27,7 +27,7 @@ export default function WallpaperCard({
 
   return (
     <div
-      className="hardcore-card"
+      className={`hardcore-card wallpaper-card-container ${isSelected ? 'selected' : ''}`}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -39,10 +39,10 @@ export default function WallpaperCard({
     >
       {/* Image Preview Container */}
       <div
+        className={`card-image-box ${isMobile ? 'mobile-ratio' : 'desktop-ratio'}`}
         style={{
           position: 'relative',
           width: '100%',
-          aspectRatio: isMobile ? '9 / 14' : '16 / 9',
           overflow: 'hidden',
           background: '#0a0a0a',
           cursor: 'pointer',
@@ -94,13 +94,10 @@ export default function WallpaperCard({
             e.stopPropagation();
             onToggleSelect(item);
           }}
+          className="card-select-checkbox"
           style={{
             position: 'absolute',
-            top: '10px',
-            left: '10px',
             zIndex: 4,
-            width: '26px',
-            height: '26px',
             borderRadius: '4px',
             border: isSelected ? 'none' : '1.5px solid rgba(250, 204, 21, 0.6)',
             background: isSelected ? '#facc15' : 'rgba(0, 0, 0, 0.75)',
@@ -113,48 +110,44 @@ export default function WallpaperCard({
           }}
           title={isSelected ? 'Remove from pack' : 'Add to pack'}
         >
-          {isSelected && <Check size={18} strokeWidth={3.5} />}
+          {isSelected && <Check size={16} strokeWidth={3.5} />}
         </button>
 
         {/* Device & Ratio Indicator (Top-Right) */}
         <div
+          className="card-ratio-badge"
           style={{
             position: 'absolute',
-            top: '10px',
-            right: '10px',
             zIndex: 4,
             background: 'rgba(0, 0, 0, 0.8)',
             border: '1px solid rgba(250, 204, 21, 0.3)',
             borderRadius: '3px',
-            padding: '2px 6px',
-            fontSize: '0.66rem',
             fontWeight: 800,
             color: '#facc15',
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
           }}
         >
-          {isMobile ? 'MOBILE 9:16' : 'DESKTOP 16:9'}
+          {isMobile ? '9:16' : '16:9'}
         </div>
       </div>
 
       {/* Card Info Footer matching Screenshots */}
       <div
+        className="card-footer-info"
         style={{
-          padding: '12px 14px',
           background: '#0d0d0d',
           borderTop: '1px solid #1c1c1c',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '12px',
         }}
       >
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ overflow: 'hidden', minWidth: 0 }}>
           {/* Title */}
           <div
+            className="card-title-text"
             style={{
-              fontSize: '0.86rem',
               fontWeight: 800,
               color: '#ffffff',
               letterSpacing: '0.02em',
@@ -162,7 +155,6 @@ export default function WallpaperCard({
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-              marginBottom: '3px',
             }}
             title={item.title}
           >
@@ -171,64 +163,39 @@ export default function WallpaperCard({
 
           {/* Resolution & Aspect Ratio */}
           <div
+            className="card-res-text"
             style={{
-              fontSize: '0.74rem',
               fontFamily: 'var(--font-mono)',
               color: '#a3a3a3',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '4px',
             }}
           >
             <span style={{ color: '#facc15', fontWeight: 600 }}>{item.resolutionStr}</span>
-            <span>•</span>
-            <span>{isMobile ? '9:16' : '16:9'}</span>
           </div>
         </div>
 
         {/* Action icons (Right) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="card-actions-group" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
           {/* Lightbox zoom */}
           <button
             type="button"
             onClick={() => onOpenLightbox(item)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#777777',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '4px',
-            }}
+            className="card-action-icon-btn"
             title="Inspect"
           >
-            <Maximize2 size={16} />
+            <Maximize2 size={15} />
           </button>
 
-          {/* Quick single download (matching yellow arrow in screenshot) */}
+          {/* Quick single download */}
           <button
             type="button"
             onClick={() => onSingleDownload(item)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#facc15',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '4px',
-              transition: 'transform 0.1s',
-            }}
+            className="card-action-icon-btn download-accent"
             title="Download Wallpaper"
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
           >
-            <Download size={18} strokeWidth={2.5} />
+            <Download size={16} strokeWidth={2.5} />
           </button>
         </div>
       </div>

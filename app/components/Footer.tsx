@@ -44,12 +44,11 @@ export default function Footer() {
             </span>
           </div>
           <p style={{ color: '#aaaaaa', lineHeight: 1.6, marginBottom: '16px', fontSize: '0.88rem' }}>
-            High-resolution PC and mobile gaming wallpaper discovery engine. Pure black aesthetic, no compression, zero bloat, and instantaneous in-memory game pack packaging.
+            High-resolution pure black wallpaper discovery engine for Gaming, Anime, Movies, Nature, Space, and AMOLED displays. Zero compression, zero bloat, and instantaneous in-memory batch ZIP packaging.
           </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Skull size={18} color="#facc15" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#facc15', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-              Hardcore Gaming. No Fluff. No Limits.
+              Pure High-Res. No Compression. Pure Black Aesthetic.
             </span>
           </div>
         </div>
@@ -138,7 +137,7 @@ export default function Footer() {
             Developer
           </h4>
           <p style={{ color: '#aaaaaa', lineHeight: 1.5, marginBottom: '14px', fontSize: '0.85rem' }}>
-            Created by <strong style={{ color: '#ffffff' }}>Md-Saim</strong>. Built for PC gamers and wallpaper enthusiasts.
+            Created by <strong style={{ color: '#ffffff' }}>Md-Saim</strong>. Built for pure high-resolution wallpaper discovery.
           </p>
           <a
             href="https://github.com/Md-Saim"

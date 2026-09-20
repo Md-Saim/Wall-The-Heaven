@@ -172,7 +172,7 @@ export default function PackStatusView({
           letterSpacing: '0.01em',
         }}
       >
-        Your game pack is ready to download:{' '}
+        Your wallpaper pack is ready to download:{' '}
         <span style={{ color: '#facc15', fontWeight: 700 }}>{zipFileName}</span>
       </div>
 
@@ -193,18 +193,18 @@ export default function PackStatusView({
       >
         <AlertTriangle size={22} color="#f87171" style={{ flexShrink: 0 }} />
         <div style={{ fontSize: '0.84rem', color: '#fca5a5', lineHeight: 1.45, fontWeight: 600 }}>
-          <strong style={{ color: '#f87171', letterSpacing: '0.03em' }}>DISCLAIMER:</strong> This game pack is compiled in-memory in your browser. It <strong style={{ textDecoration: 'underline' }}>will be destroyed if you refresh or leave this website</strong>. Download your ZIP now!
+          <strong style={{ color: '#f87171', letterSpacing: '0.03em' }}>DISCLAIMER:</strong> This wallpaper pack is compiled in-memory in your browser. It <strong style={{ textDecoration: 'underline' }}>will be destroyed if you refresh or leave this website</strong>. Download your ZIP now!
         </div>
       </div>
 
       {/* Button Group matching Screenshot */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', maxWidth: '380px', marginBottom: '50px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', maxWidth: '380px', marginBottom: '40px' }}>
         {/* DOWNLOAD ZIP button */}
         <button
           type="button"
           onClick={onDownloadZip}
           className="btn-yellow-primary"
-          style={{ width: '100%', padding: '16px 24px', fontSize: '1.05rem' }}
+          style={{ width: '100%', padding: '15px 24px', fontSize: '1rem' }}
         >
           <span>DOWNLOAD ZIP</span>
           <Download size={20} strokeWidth={3} />
@@ -215,18 +215,17 @@ export default function PackStatusView({
           type="button"
           onClick={onNewSearch}
           className="btn-dark-outline"
-          style={{ width: '100%', padding: '16px 24px', fontSize: '1.05rem' }}
+          style={{ width: '100%', padding: '15px 24px', fontSize: '1rem' }}
         >
           <span>NEW SEARCH</span>
           <Search size={20} strokeWidth={2.5} />
         </button>
       </div>
 
-      {/* Bottom Hardcore Gaming Tagline matching Screenshot */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: 'auto' }}>
-        <Skull size={28} color="#facc15" />
+      {/* Bottom Pure High-Res Tagline */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: 'auto' }}>
         <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#facc15', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          HARDCORE GAMING. NO FLUFF. NO LIMITS.
+          PURE HIGH-RES. NO COMPRESSION. NO LIMITS.
           <br />
           BUILD YOUR OWN COLLECTION.
         </div>

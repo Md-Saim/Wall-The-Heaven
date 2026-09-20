@@ -38,6 +38,8 @@ html, body {
   font-family: var(--font-main);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Scrollbar */
@@ -56,7 +58,7 @@ html, body {
   background: var(--accent-yellow);
 }
 
-/* Hardcore Card Style matching screenshot */
+/* Card Style */
 .hardcore-card {
   background: var(--bg-card);
   border: 1px solid var(--border-gold-subtle);
@@ -72,7 +74,19 @@ html, body {
   transform: translateY(-2px);
 }
 
-/* Big Display Headers (matching PACK READY and SEARCHING & DOWNLOADING) */
+/* Skeleton Shimmer Animation */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Display Headers */
 .display-title {
   font-family: var(--font-display);
   text-transform: uppercase;
@@ -133,7 +147,7 @@ html, body {
   background: #171717;
 }
 
-/* Responsive Pill Button */
+/* Pill Filter Button */
 .pill-filter {
   padding: 5px 14px;
   border-radius: 4px;
@@ -159,6 +173,17 @@ html, body {
   box-shadow: 0 0 10px rgba(250, 204, 21, 0.35);
 }
 
+/* Label Visibility: Desktop shows full, Mobile shows short */
+.ratio-label-mobile,
+.res-label-mobile {
+  display: none;
+}
+
+.ratio-label-desktop,
+.res-label-desktop {
+  display: inline;
+}
+
 /* Animations */
 @keyframes pulseBar {
   0%, 100% { opacity: 0.9; }
@@ -177,6 +202,7 @@ html, body {
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
+  padding: 12px 20px;
 }
 
 .header-left-col {
@@ -197,12 +223,236 @@ html, body {
   align-items: center;
 }
 
-/* Mobile vs Desktop Display Rules */
+/* Search Bar Component Styling */
+.search-section-wrapper {
+  padding: 36px 20px 20px;
+}
+
+.search-submit-button {
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  gap: 8px;
+}
+
+.search-filter-panel {
+  padding: 14px 18px;
+}
+
+/* Wallpapers Section & Grid Layout */
+.wallpapers-section-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 10px 20px 100px;
+}
+
+.wallpapers-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.select-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0d0d0d;
+  border: 1px solid #282828;
+  color: #cccccc;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.select-all-btn:hover {
+  border-color: #facc15;
+  color: #ffffff;
+}
+
+.wallpapers-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.wallpapers-grid-layout.mobile-form-factor {
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+/* Card Element Styles */
+.card-image-box.desktop-ratio {
+  aspect-ratio: 16 / 9;
+}
+
+.card-image-box.mobile-ratio {
+  aspect-ratio: 9 / 14;
+}
+
+.card-select-checkbox {
+  top: 10px;
+  left: 10px;
+  width: 26px;
+  height: 26px;
+}
+
+.card-ratio-badge {
+  top: 10px;
+  right: 10px;
+  padding: 2px 6px;
+  font-size: 0.66rem;
+}
+
+.card-footer-info {
+  padding: 11px 13px;
+  gap: 10px;
+}
+
+.card-title-text {
+  font-size: 0.84rem;
+  margin-bottom: 3px;
+}
+
+.card-res-text {
+  font-size: 0.72rem;
+}
+
+.card-action-icon-btn {
+  background: transparent;
+  border: none;
+  color: #777777;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: transform 0.1s, color 0.15s;
+}
+
+.card-action-icon-btn:hover {
+  color: #ffffff;
+}
+
+.card-action-icon-btn.download-accent {
+  color: #facc15;
+}
+
+.card-action-icon-btn.download-accent:hover {
+  transform: translateY(1px);
+}
+
+/* Batch Download Bar */
+.batch-download-bar-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  width: calc(100% - 32px);
+  max-width: 600px;
+}
+
+.batch-download-bar-content {
+  padding: 12px 18px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1.5px solid #facc15;
+  background: rgba(10, 10, 10, 0.96);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(250, 204, 21, 0.25);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.batch-count-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: #facc15;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.batch-main-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.batch-text-desktop {
+  display: inline;
+}
+
+.batch-text-mobile {
+  display: none;
+}
+
+.batch-sub-title {
+  font-size: 0.70rem;
+  color: #888888;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.batch-clear-btn {
+  background: transparent;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  padding: 6px 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+
+.batch-clear-btn:hover {
+  color: #ffffff;
+}
+
+.batch-package-btn {
+  padding: 9px 18px;
+  font-size: 0.84rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.batch-btn-text-desktop {
+  display: inline;
+}
+
+.batch-btn-text-mobile {
+  display: none;
+}
+
+/* ============================================================
+   TABLET BREAKPOINT (<= 820px): Header collapses to hamburger
+   ============================================================ */
 @media (max-width: 820px) {
   .header-grid-layout {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px 14px;
   }
   .desktop-nav-group {
     display: none !important;
@@ -218,5 +468,202 @@ html, body {
   }
   .mobile-envelope-drawer {
     display: none !important;
+  }
+}
+
+/* ============================================================
+   MOBILE BREAKPOINT (<= 640px): Full mobile optimization
+   ============================================================ */
+@media (max-width: 640px) {
+  /* Search Section */
+  .search-section-wrapper {
+    padding: 16px 10px 12px;
+  }
+
+  .search-submit-button {
+    padding: 12px 12px;
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+
+  .search-filter-panel {
+    padding: 10px 10px;
+    gap: 8px;
+  }
+
+  /* Label toggles: show short labels on mobile */
+  .ratio-label-desktop,
+  .res-label-desktop {
+    display: none !important;
+  }
+
+  .ratio-label-mobile,
+  .res-label-mobile {
+    display: inline !important;
+  }
+
+  .pill-filter {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  /* Wallpapers Section */
+  .wallpapers-section-wrapper {
+    padding: 8px 8px 80px;
+  }
+
+  .wallpapers-top-bar {
+    gap: 6px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .wallpapers-top-bar span {
+    font-size: 0.78rem !important;
+  }
+
+  /* Compact 2-column mobile grid for ALL aspect ratios */
+  .wallpapers-grid-layout,
+  .wallpapers-grid-layout.mobile-form-factor {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .card-image-box.desktop-ratio {
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .card-image-box.mobile-ratio {
+    aspect-ratio: 9 / 13 !important;
+  }
+
+  .card-select-checkbox {
+    top: 5px !important;
+    left: 5px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .card-ratio-badge {
+    top: 5px !important;
+    right: 5px !important;
+    padding: 1px 4px !important;
+    font-size: 0.55rem !important;
+  }
+
+  .card-footer-info {
+    padding: 5px 7px !important;
+    gap: 4px !important;
+  }
+
+  .card-title-text {
+    font-size: 0.62rem !important;
+    margin-bottom: 1px !important;
+  }
+
+  .card-res-text {
+    font-size: 0.56rem !important;
+  }
+
+  .card-action-icon-btn {
+    padding: 2px !important;
+  }
+
+  .card-action-icon-btn svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  /* Batch Download Bar Mobile */
+  .batch-download-bar-container {
+    bottom: 8px !important;
+    width: calc(100% - 12px) !important;
+  }
+
+  .batch-download-bar-content {
+    padding: 8px 8px !important;
+    gap: 6px !important;
+  }
+
+  .batch-count-badge {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .batch-text-desktop {
+    display: none !important;
+  }
+
+  .batch-text-mobile {
+    display: inline !important;
+    font-size: 0.72rem !important;
+  }
+
+  .batch-sub-title {
+    display: none !important;
+  }
+
+  .batch-clear-btn {
+    padding: 3px 5px !important;
+    font-size: 0.66rem !important;
+  }
+
+  .batch-package-btn {
+    padding: 6px 10px !important;
+    font-size: 0.72rem !important;
+    gap: 3px !important;
+  }
+
+  .batch-btn-text-desktop {
+    display: none !important;
+  }
+
+  .batch-btn-text-mobile {
+    display: inline !important;
+  }
+
+  /* Hero Title smaller on mobile */
+  .display-title {
+    font-size: clamp(1.6rem, 8vw, 2.8rem) !important;
+  }
+
+  /* Select All button compact */
+  .select-all-btn {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+    gap: 4px;
+  }
+
+  /* Lightbox mobile adjustments */
+  .lightbox-header-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* ============================================================
+   VERY SMALL SCREENS (<= 400px)
+   ============================================================ */
+@media (max-width: 400px) {
+  .header-grid-layout {
+    padding: 8px 8px;
+  }
+
+  .search-section-wrapper {
+    padding: 12px 6px 10px;
+  }
+
+  .search-filter-panel {
+    padding: 8px 6px;
+  }
+
+  .wallpapers-section-wrapper {
+    padding: 6px 6px 70px;
+  }
+
+  .wallpapers-grid-layout,
+  .wallpapers-grid-layout.mobile-form-factor {
+    gap: 6px !important;
   }
 }

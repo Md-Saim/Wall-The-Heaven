@@ -337,7 +337,7 @@ export async function GET(request: NextRequest) {
   const query = rawQuery.trim();
   const device = (searchParams.get('device') || 'desktop') as 'desktop' | 'mobile' | 'all';
   const minRes = searchParams.get('minRes') || 'all';
-  const limit = Math.min(80, Math.max(10, parseInt(searchParams.get('limit') || '45', 10)));
+  const limit = Math.min(100, Math.max(10, parseInt(searchParams.get('limit') || '65', 10)));
 
   // Query sources concurrently in parallel
   const [alphaResults, wcResults, fkwResults, whResults] = await Promise.all([
@@ -360,11 +360,15 @@ export async function GET(request: NextRequest) {
     deduped.push(item);
   }
 
-  // Filter by minimum resolution
+  // Filter by resolution tier (minimum resolution threshold)
   const filtered = deduped.filter((item) => {
-    if (minRes === '4k') return item.width >= 3840 || item.height >= 2160;
-    if (minRes === '1440p') return item.width >= 2560 || item.height >= 1440;
-    if (minRes === '1080p') return item.width >= 1920 || item.height >= 1080;
+    if (minRes === 'all') return true;
+    const maxDim = Math.max(item.width, item.height);
+    const minDim = Math.min(item.width, item.height);
+
+    if (minRes === '4k') return maxDim >= 3600 && minDim >= 1800;
+    if (minRes === '1440p') return maxDim >= 2400 && minDim >= 1300;
+    if (minRes === '1080p') return maxDim >= 1800 && minDim >= 900;
     return true;
   });
 

@@ -91,8 +91,8 @@ export default function BrowseView({
         const params = new URLSearchParams({
           q: activeQuery,
           device: activeDevice,
-          minRes: activeMinRes,
-          limit: '45',
+          minRes: 'all',
+          limit: '65',
         });
 
         const res = await fetch(`/api/search?${params.toString()}`, {
@@ -125,7 +125,8 @@ export default function BrowseView({
     [query, device, minRes]
   );
 
-  // Resolution filtering: instantly filters currently loaded results
+  // Resolution filtering: minimum resolution thresholds
+  // Selecting "1080p" shows wallpapers >= 1080p, "1440p" shows >= 1440p, "4k" shows only 4K+
   const displayedItems = useMemo(() => {
     if (minRes === 'all') return results;
     return results.filter((item) => {
@@ -133,14 +134,18 @@ export default function BrowseView({
       const h = item.height;
       const maxDim = Math.max(w, h);
       const minDim = Math.min(w, h);
+
       if (minRes === '4k') {
-        return maxDim >= 3800 || minDim >= 2100 || (w * h >= 3840 * 2160 * 0.85);
+        // True 4K: at least 3840x2160 or equivalent pixel density
+        return maxDim >= 3600 && minDim >= 1800;
       }
       if (minRes === '1440p') {
-        return maxDim >= 2500 || minDim >= 1400 || (w * h >= 2560 * 1440 * 0.85);
+        // At least 2560x1440 or equivalent
+        return maxDim >= 2400 && minDim >= 1300;
       }
       if (minRes === '1080p') {
-        return maxDim >= 1900 || minDim >= 1050 || (w * h >= 1920 * 1080 * 0.85);
+        // At least 1920x1080 or equivalent
+        return maxDim >= 1800 && minDim >= 900;
       }
       return true;
     });
@@ -290,6 +295,8 @@ export default function BrowseView({
               isLoading={isLoading}
               query={query}
               device={device}
+              minRes={minRes}
+              onResolutionChange={handleResolutionChange}
             />
 
             {/* Floating Bottom Batch Pack Bar */}

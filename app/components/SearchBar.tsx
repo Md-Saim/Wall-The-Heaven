@@ -15,14 +15,15 @@ interface SearchBarProps {
 }
 
 const TRENDING_TAGS = [
-  '#CS2',
+  '#ANIME',
   '#CYBERPUNK',
+  '#NATURE',
   '#ELDENRING',
-  '#GTA5',
+  '#MOVIES',
+  '#CARS',
+  '#SPACE',
   '#VALORANT',
-  '#ZHONGLI',
-  '#DARKSOULS',
-  '#WITCHER',
+  '#MINIMAL',
 ];
 
 export default function SearchBar({
@@ -59,23 +60,23 @@ export default function SearchBar({
 
   return (
     <div
+      className="search-section-wrapper"
       style={{
         position: 'relative',
         zIndex: 10,
         maxWidth: '1080px',
         margin: '0 auto',
-        padding: '36px 20px 20px',
       }}
     >
       {/* Hero Title matching Screenshots */}
-      <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
         <h2
           style={{
-            fontSize: 'clamp(2.1rem, 5.5vw, 3.4rem)',
+            fontSize: 'clamp(1.9rem, 5.5vw, 3.4rem)',
             fontWeight: 900,
             color: '#ffffff',
             letterSpacing: '-0.02em',
-            lineHeight: 1.1,
+            lineHeight: 1.15,
             marginBottom: '10px',
           }}
         >
@@ -83,19 +84,21 @@ export default function SearchBar({
         </h2>
         <p
           style={{
-            fontSize: '1rem',
+            fontSize: 'clamp(0.85rem, 2.5vw, 1rem)',
             color: 'var(--text-secondary)',
             fontWeight: 500,
             letterSpacing: '0.01em',
+            padding: '0 10px',
           }}
         >
-          100% Clean. Hardcore Gaming. Pure Black Aesthetic.
+          100% Clean. Gaming, Anime, Movies, Nature &amp; More. Pure Black Aesthetic.
         </p>
       </div>
 
-      {/* Main Search Input Box matching Screenshot */}
+      {/* Main Search Input Box */}
       <form
         onSubmit={handleSubmit}
+        className="search-form-box"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -103,9 +106,11 @@ export default function SearchBar({
           border: '1px solid #2a2a2a',
           borderRadius: '4px',
           overflow: 'hidden',
-          marginBottom: '20px',
+          marginBottom: '16px',
           boxShadow: '0 8px 30px rgba(0, 0, 0, 0.9)',
           transition: 'border-color 0.2s',
+          width: '100%',
+          boxSizing: 'border-box',
         }}
         onFocus={(e) => {
           e.currentTarget.style.borderColor = '#facc15';
@@ -114,23 +119,26 @@ export default function SearchBar({
           e.currentTarget.style.borderColor = '#2a2a2a';
         }}
       >
-        <div style={{ padding: '0 16px', display: 'flex', alignItems: 'center' }}>
-          <Search size={20} color="#777777" />
+        <div style={{ padding: '0 14px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+          <Search size={19} color="#777777" />
         </div>
 
         <input
           type="text"
           value={localInput}
           onChange={(e) => setLocalInput(e.target.value)}
-          placeholder="Search wallpapers (e.g. Cyberpunk 2077, Elden Ring, FPS)..."
+          placeholder="Search wallpapers (e.g. Cyberpunk, Anime, Nature, Cars)..."
+          className="search-input-element"
           style={{
             flex: 1,
+            minWidth: 0,
+            width: '100%',
             background: 'transparent',
             border: 'none',
             outline: 'none',
             color: '#ffffff',
-            fontSize: '1rem',
-            padding: '16px 0',
+            fontSize: '0.96rem',
+            padding: '14px 0',
             fontFamily: 'inherit',
           }}
         />
@@ -144,33 +152,33 @@ export default function SearchBar({
               border: 'none',
               color: '#666666',
               cursor: 'pointer',
-              padding: '8px',
-              marginRight: '8px',
+              padding: '6px',
+              marginRight: '6px',
+              flexShrink: 0,
             }}
           >
             <X size={18} />
           </button>
         )}
 
-        {/* Big Yellow SEARCH -> button */}
+        {/* Yellow SEARCH button */}
         <button
           type="submit"
           disabled={isLoading}
+          className="search-submit-button"
           style={{
             background: '#facc15',
             color: '#000000',
             border: 'none',
             fontWeight: 900,
-            fontSize: '0.96rem',
-            padding: '16px 32px',
             cursor: isLoading ? 'wait' : 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
             transition: 'background 0.15s',
             whiteSpace: 'nowrap',
+            flexShrink: 0,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = '#eab308';
@@ -180,18 +188,18 @@ export default function SearchBar({
           }}
         >
           <span>{isLoading ? 'Searching...' : 'Search'}</span>
-          <ArrowRight size={18} strokeWidth={3} />
+          <ArrowRight size={17} strokeWidth={3} />
         </button>
       </form>
 
       {/* Filter Row: Form Factor + Resolutions + Trending Tags */}
       <div
+        className="search-filter-panel"
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '12px',
           background: 'rgba(10, 10, 10, 0.75)',
-          padding: '14px 18px',
           borderRadius: '6px',
           border: '1px solid #1c1c1c',
         }}
@@ -207,8 +215,8 @@ export default function SearchBar({
           }}
         >
           {/* Ratio / Device Form Factor */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#888888', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#888888', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
               RATIO:
             </span>
 
@@ -216,27 +224,29 @@ export default function SearchBar({
               type="button"
               onClick={() => handleDeviceChange('desktop')}
               className={`pill-filter ${device === 'desktop' ? 'active' : ''}`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
             >
               <Monitor size={14} />
-              <span>DESKTOP (16:9)</span>
+              <span className="ratio-label-desktop">DESKTOP (16:9)</span>
+              <span className="ratio-label-mobile">DESKTOP</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleDeviceChange('mobile')}
               className={`pill-filter ${device === 'mobile' ? 'active' : ''}`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
             >
               <Smartphone size={14} />
-              <span>MOBILE (9:16)</span>
+              <span className="ratio-label-desktop">MOBILE (9:16)</span>
+              <span className="ratio-label-mobile">MOBILE</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleDeviceChange('all')}
               className={`pill-filter ${device === 'all' ? 'active' : ''}`}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
             >
               <Globe size={14} />
               <span>ALL</span>
@@ -244,16 +254,16 @@ export default function SearchBar({
           </div>
 
           {/* Resolution Selector matching screenshot */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#888888', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-              RESOLUTION:
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#888888', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              MIN RES:
             </span>
 
             {[
-              { id: 'all', label: 'ALL' },
-              { id: '1080p', label: '1920x1080' },
-              { id: '1440p', label: '2560x1440' },
-              { id: '4k', label: '3840x2160' },
+              { id: 'all', labelDesktop: 'ALL', labelMobile: 'ALL' },
+              { id: '1080p', labelDesktop: '1920x1080', labelMobile: '1080P' },
+              { id: '1440p', labelDesktop: '2560x1440', labelMobile: '1440P' },
+              { id: '4k', labelDesktop: '3840x2160', labelMobile: '4K' },
             ].map((r) => (
               <button
                 key={r.id}
@@ -261,7 +271,8 @@ export default function SearchBar({
                 onClick={() => onResolutionChange(r.id)}
                 className={`pill-filter ${minRes === r.id ? 'active' : ''}`}
               >
-                {r.label}
+                <span className="res-label-desktop">{r.labelDesktop}</span>
+                <span className="res-label-mobile">{r.labelMobile}</span>
               </button>
             ))}
           </div>
