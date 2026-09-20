@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Half-Life Lambda in Circle -->
+  <circle cx="100" cy="100" r="75" stroke="#f97316" stroke-width="12" stroke-opacity="0.85"/>
+  <!-- Lambda character -->
+  <path d="M78 150 L115 55 L125 55 L95 132 L138 150" stroke="#fbbf24" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

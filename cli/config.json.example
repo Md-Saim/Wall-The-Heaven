@@ -1,0 +1,12 @@
+{
+  "wallhaven_api_key": "",
+  "pexels_api_key": "",
+  "pixabay_api_key": "",
+  "unsplash_access_key": "",
+  "reddit_client_id": "",
+  "reddit_client_secret": "",
+  "default_count": 30,
+  "default_min_res": "1920x1080",
+  "max_download_workers": 8,
+  "save_zip_only": false
+}

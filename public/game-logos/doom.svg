@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Mark of the Doom Slayer -->
+  <!-- Central Rune Bar -->
+  <rect x="94" y="25" width="12" height="150" fill="#dc2626"/>
+  <!-- Top Horn Prongs -->
+  <polygon points="100,30 65,70 80,75 100,50 120,75 135,70" fill="#ef4444"/>
+  <!-- Middle Cross Runes -->
+  <polygon points="100,85 55,105 50,120 75,115 100,102 125,115 150,120 145,105" fill="#dc2626"/>
+  <!-- Lower Wings -->
+  <polygon points="100,135 60,165 75,175 100,150 125,175 140,165" fill="#ef4444"/>
+</svg>

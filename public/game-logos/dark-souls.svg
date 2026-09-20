@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Darksign glowing eclipse ring -->
+  <circle cx="100" cy="100" r="70" stroke="#ff4500" stroke-width="12" stroke-opacity="0.8" />
+  <circle cx="100" cy="100" r="64" stroke="#ffaa00" stroke-width="4" stroke-opacity="0.9" />
+  <circle cx="100" cy="100" r="54" fill="#000000" />
+  <!-- Flame Tendrils -->
+  <path d="M100 25 C92 45, 80 55, 85 75 C88 85, 98 90, 100 110 C102 90, 112 85, 115 75 C120 55, 108 45, 100 25 Z" fill="#ff7700" fill-opacity="0.6"/>
+  <path d="M96 40 C92 55, 88 65, 94 80 C97 88, 100 95, 100 105 C100 95, 103 88, 106 80 C112 65, 108 55, 104 40 Z" fill="#ffcc00" fill-opacity="0.7"/>
+  <!-- Coiled Sword Crossguard silhouette -->
+  <path d="M75 125 L125 125 M100 100 L100 170 M92 135 L108 135 M94 150 L106 150" stroke="#ffeedd" stroke-width="5" stroke-linecap="round"/>
+</svg>

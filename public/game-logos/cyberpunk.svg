@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Cyberpunk Samurai Oni Mask Silhouette -->
+  <!-- Horns -->
+  <path d="M45 50 L65 75 L50 85 Z M155 50 L135 75 L150 85 Z" fill="#00f0ff" fill-opacity="0.85"/>
+  <!-- Forehead Crest -->
+  <polygon points="100,35 120,65 100,80 80,65" fill="#ff0055" fill-opacity="0.9"/>
+  <!-- Outer Face Silhouette -->
+  <path d="M60 85 L140 85 L150 120 L130 155 L100 170 L70 155 L50 120 Z" stroke="#00f0ff" stroke-width="6" stroke-linejoin="round" fill="none"/>
+  <!-- Fierce Eyes -->
+  <polygon points="68,105 92,112 85,118 70,115" fill="#ffe600"/>
+  <polygon points="132,105 108,112 115,118 130,115" fill="#ffe600"/>
+  <!-- Fang Teeth / Mouth Grate -->
+  <rect x="75" y="132" width="50" height="18" rx="4" stroke="#ff0055" stroke-width="3" fill="#111"/>
+  <line x1="85" y1="132" x2="85" y2="150" stroke="#00f0ff" stroke-width="2.5"/>
+  <line x1="95" y1="132" x2="95" y2="150" stroke="#00f0ff" stroke-width="2.5"/>
+  <line x1="105" y1="132" x2="105" y2="150" stroke="#00f0ff" stroke-width="2.5"/>
+  <line x1="115" y1="132" x2="115" y2="150" stroke="#00f0ff" stroke-width="2.5"/>
+</svg>

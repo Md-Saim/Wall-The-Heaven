@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Elden Ring intersecting Great Runes -->
+  <!-- Top Center Ring -->
+  <circle cx="100" cy="70" r="38" stroke="#f6d365" stroke-width="4.5" stroke-opacity="0.85"/>
+  <!-- Left Lower Ring -->
+  <circle cx="75" cy="110" r="38" stroke="#f6d365" stroke-width="4.5" stroke-opacity="0.85"/>
+  <!-- Right Lower Ring -->
+  <circle cx="125" cy="110" r="38" stroke="#f6d365" stroke-width="4.5" stroke-opacity="0.85"/>
+  <!-- Lower Arc / Rune of Death arc -->
+  <path d="M40 155 Q100 185 160 155" stroke="#fda085" stroke-width="6" stroke-linecap="round" stroke-opacity="0.9"/>
+  <path d="M55 145 Q100 172 145 145" stroke="#f6d365" stroke-width="3" stroke-linecap="round" stroke-opacity="0.8"/>
+  <!-- Vertical central spear axis -->
+  <line x1="100" y1="15" x2="100" y2="185" stroke="#fff1bd" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.9"/>
+  <!-- Cross bar -->
+  <line x1="60" y1="70" x2="140" y2="70" stroke="#fff1bd" stroke-width="2.5" stroke-opacity="0.75"/>
+</svg>
