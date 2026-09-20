@@ -53,7 +53,8 @@ export default function SearchBar({
 
   const handleDeviceChange = (newDevice: 'desktop' | 'mobile' | 'all') => {
     setDevice(newDevice);
-    onSearch(localInput.trim(), newDevice);
+    const activeQ = localInput.trim() || query;
+    onSearch(activeQ, newDevice);
   };
 
   return (

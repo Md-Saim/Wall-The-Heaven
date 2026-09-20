@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
-import { CheckCircle2, Download, Search, Skull, ArrowLeft } from 'lucide-react';
+import { CheckCircle2, Download, Search, Skull, ArrowLeft, AlertTriangle } from 'lucide-react';
 
 interface PackStatusViewProps {
   status: 'packaging' | 'ready';
   zipProgress: { current: number; total: number; percent: number };
   zipFileName: string;
-  zipBlob: Blob | null;
+  zipBlob?: Blob | null;
   onDownloadZip: () => void;
   onNewSearch: () => void;
   onBackToBrowse: () => void;
@@ -108,7 +108,7 @@ export default function PackStatusView({
             letterSpacing: '0.02em',
           }}
         >
-          {zipProgress.current} / {zipProgress.total} wallpapers • AlphaCoders + Wallhaven
+          {zipProgress.current} / {zipProgress.total} wallpapers • AlphaCoders + WallpapersCraft
         </div>
       </div>
     );
@@ -168,7 +168,7 @@ export default function PackStatusView({
           fontSize: '1.05rem',
           color: '#e5e5e5',
           fontFamily: 'var(--font-mono)',
-          marginBottom: '36px',
+          marginBottom: '28px',
           letterSpacing: '0.01em',
         }}
       >
@@ -176,8 +176,29 @@ export default function PackStatusView({
         <span style={{ color: '#facc15', fontWeight: 700 }}>{zipFileName}</span>
       </div>
 
+      {/* User Requested Disclaimer: Pack will be destroyed if you refresh */}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '520px',
+          background: 'rgba(239, 68, 68, 0.08)',
+          border: '1px solid rgba(239, 68, 68, 0.4)',
+          borderRadius: '4px',
+          padding: '12px 16px',
+          marginBottom: '28px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+        }}
+      >
+        <AlertTriangle size={22} color="#f87171" style={{ flexShrink: 0 }} />
+        <div style={{ fontSize: '0.84rem', color: '#fca5a5', lineHeight: 1.45, fontWeight: 600 }}>
+          <strong style={{ color: '#f87171', letterSpacing: '0.03em' }}>DISCLAIMER:</strong> This game pack is compiled in-memory in your browser. It <strong style={{ textDecoration: 'underline' }}>will be destroyed if you refresh or leave this website</strong>. Download your ZIP now!
+        </div>
+      </div>
+
       {/* Button Group matching Screenshot */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', maxWidth: '380px', marginBottom: '60px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', maxWidth: '380px', marginBottom: '50px' }}>
         {/* DOWNLOAD ZIP button */}
         <button
           type="button"

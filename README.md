@@ -42,8 +42,15 @@ Search and download genuine 4K, 2K, and 1080p wallpapers tailored specifically f
 - **Quality Filters**:
   - Filter by **ALL**, **1080p FHD**, **2560x1440 2K**, and **3840x2160 4K**.
   - Trending game shortcuts: `#CS2`, `#CYBERPUNK`, `#ELDENRING`, `#GTA5`, `#VALORANT`, `#ZHONGLI`.
-- **Fullscreen Preview**:
-  - Inspect full-resolution wallpapers with resolution tags, aspect ratios, and quick download.
+- **Dedicated Pages & SEO**:
+  - `/browse` — Full wallpaper gallery with instant 0ms device ratio switching.
+  - `/about` — Platform background and developer attribution to Md-Saim.
+  - `/disclaimer` — Technical architecture, target audience, and fair use copyright notices.
+- **Full Navigation & Footer**:
+  - Header featuring middle GitHub shortcut and streamlined navigation (no clutter or auth required).
+  - Dedicated footer with form factor shortcuts, operational status, and developer profile links.
+- **In-Memory Protection**:
+  - Pack status displays real-time warnings to protect ephemeral in-browser packs before page refreshes.
 - **Python CLI Tool Included**:
   - Standalone multi-threaded command-line downloader available in the `cli/` folder.
 
