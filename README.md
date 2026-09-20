@@ -5,8 +5,17 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMd-Saim%2FWall-The-Heaven)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/Md-Saim/Wall-The-Heaven)
+[![CI & Auto-Verification](https://github.com/Md-Saim/Wall-The-Heaven/actions/workflows/ci.yml/badge.svg)](https://github.com/Md-Saim/Wall-The-Heaven/actions)
 [![Next.js 15](https://img.shields.io/badge/Next.js-15.5-0070F3?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
+---
+
+## ⚡ Automated CI/CD & Auto-Deployments
+
+Every time you run `git push`:
+1. **GitHub Actions (`ci.yml`)**: Automatically triggers to build, lint, and verify your Next.js application.
+2. **Vercel Webhook**: Automatically detects new commits on `main` and immediately builds & publishes the latest production deployment in under 30 seconds with zero manual clicks!
 
 ---
 
