@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Unreal Engine Circle & U -->
+  <circle cx="100" cy="100" r="85" stroke="#888" stroke-width="6" stroke-opacity="0.6"/>
+  <path d="M70 65 L70 120 C70 138, 82 150, 100 150 C118 150, 130 138, 130 120 L130 65 M90 65 L90 115 C90 122, 94 128, 100 128 C106 128, 110 122, 110 115 L110 65" stroke="#facc15" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

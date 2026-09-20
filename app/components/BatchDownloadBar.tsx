@@ -1,23 +1,19 @@
 'use client';
 
 import React from 'react';
-import { Download, X, Archive, Loader2 } from 'lucide-react';
+import { Download, X, Archive } from 'lucide-react';
 import { WallpaperItem } from '../api/search/route';
 
 interface BatchDownloadBarProps {
   selectedItems: WallpaperItem[];
   onDeselectAll: () => void;
-  onDownloadZip: () => void;
-  isZipping: boolean;
-  zipProgress: { current: number; total: number; percent: number };
+  onStartPackaging: () => void;
 }
 
 export default function BatchDownloadBar({
   selectedItems,
   onDeselectAll,
-  onDownloadZip,
-  isZipping,
-  zipProgress,
+  onStartPackaging,
 }: BatchDownloadBarProps) {
   if (selectedItems.length === 0) return null;
 
@@ -31,113 +27,82 @@ export default function BatchDownloadBar({
         transform: 'translateX(-50%)',
         zIndex: 40,
         width: 'calc(100% - 40px)',
-        maxWidth: '680px',
-        animation: 'floatGentle 4s infinite ease-in-out',
+        maxWidth: '620px',
       }}
     >
       <div
-        className="glass-panel"
         style={{
-          padding: '14px 20px',
-          borderRadius: 'var(--radius-full)',
+          padding: '12px 18px',
+          borderRadius: '6px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '16px',
-          border: '1px solid rgba(0, 240, 255, 0.35)',
-          boxShadow: '0 12px 40px 0 rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.25)',
-          background: 'rgba(10, 14, 26, 0.92)',
+          border: '1.5px solid #facc15',
+          background: 'rgba(10, 10, 10, 0.96)',
+          boxShadow: '0 10px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(250, 204, 21, 0.25)',
         }}
       >
-        {/* Selected count info */}
+        {/* Count info */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div
             style={{
-              width: '34px',
-              height: '34px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #00f0ff 0%, #a855f7 100%)',
-              color: '#05070d',
+              width: '32px',
+              height: '32px',
+              borderRadius: '4px',
+              background: '#facc15',
+              color: '#000000',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontWeight: 800,
-              fontSize: '0.88rem',
+              fontWeight: 900,
+              fontSize: '0.9rem',
             }}
           >
             {selectedItems.length}
           </div>
 
           <div>
-            <div style={{ fontSize: '0.92rem', fontWeight: 700 }}>
-              {selectedItems.length} Wallpaper{selectedItems.length > 1 ? 's' : ''} Selected
+            <div style={{ fontSize: '0.88rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              {selectedItems.length} WALLPAPER{selectedItems.length > 1 ? 'S' : ''} IN PACK
             </div>
-            {isZipping ? (
-              <div style={{ fontSize: '0.76rem', color: 'var(--accent-cyan)' }}>
-                Packaging ZIP: {zipProgress.current} / {zipProgress.total} ({zipProgress.percent}%)
-              </div>
-            ) : (
-              <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
-                Ready to download as clean ZIP
-              </div>
-            )}
+            <div style={{ fontSize: '0.72rem', color: '#888888', textTransform: 'uppercase' }}>
+              READY TO PACKAGE INTO ZIP
+            </div>
           </div>
         </div>
 
-        {/* Action buttons */}
+        {/* Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <button
             type="button"
             onClick={onDeselectAll}
-            disabled={isZipping}
             style={{
               background: 'transparent',
               border: 'none',
-              color: 'var(--text-secondary)',
-              cursor: isZipping ? 'not-allowed' : 'pointer',
-              padding: '6px 12px',
-              fontSize: '0.84rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
+              color: '#888888',
+              cursor: 'pointer',
+              padding: '6px 10px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              textTransform: 'uppercase',
             }}
           >
-            <X size={15} />
-            <span>Clear</span>
+            CLEAR
           </button>
 
           <button
             type="button"
-            onClick={onDownloadZip}
-            disabled={isZipping}
+            onClick={onStartPackaging}
+            className="btn-yellow-primary"
             style={{
-              background: 'linear-gradient(135deg, #00f0ff 0%, #a855f7 100%)',
-              color: '#05070d',
-              border: 'none',
-              borderRadius: 'var(--radius-full)',
-              padding: '10px 22px',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: isZipping ? 'wait' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              boxShadow: '0 0 20px rgba(0, 240, 255, 0.4)',
-              transition: 'transform 0.15s, opacity 0.15s',
-              opacity: isZipping ? 0.8 : 1,
+              padding: '10px 20px',
+              fontSize: '0.86rem',
+              borderRadius: '4px',
             }}
           >
-            {isZipping ? (
-              <>
-                <Loader2 size={16} className="animate-spin" />
-                <span>Downloading ({zipProgress.percent}%)...</span>
-              </>
-            ) : (
-              <>
-                <Archive size={16} strokeWidth={2.5} />
-                <span>Download ZIP ({selectedItems.length})</span>
-              </>
-            )}
+            <Archive size={16} strokeWidth={2.5} />
+            <span>PACKAGE PACK</span>
           </button>
         </div>
       </div>

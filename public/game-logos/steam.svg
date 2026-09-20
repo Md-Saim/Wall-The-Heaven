@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Steam Icon -->
+  <circle cx="100" cy="100" r="90" fill="#111" stroke="#888" stroke-width="4" stroke-opacity="0.6"/>
+  <!-- Steam Arm & Joints -->
+  <path d="M100 35 A65 65 0 0 0 35 100 A65 65 0 0 0 62 153 L90 120 A22 22 0 0 1 120 90 L145 65 A65 65 0 0 0 100 35 Z" fill="#ccc" fill-opacity="0.75"/>
+  <circle cx="120" cy="90" r="18" fill="#111" stroke="#ccc" stroke-width="5"/>
+  <circle cx="85" cy="132" r="14" fill="#111" stroke="#ccc" stroke-width="4"/>
+</svg>

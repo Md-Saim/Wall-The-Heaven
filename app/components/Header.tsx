@@ -1,19 +1,31 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Github, Layers, ShieldCheck } from 'lucide-react';
+import { Github, Sparkles, FolderDown } from 'lucide-react';
 
-export default function Header() {
+interface HeaderProps {
+  onNavClick?: (view: string) => void;
+  activeView?: string;
+  selectedCount?: number;
+  onOpenQueue?: () => void;
+}
+
+export default function Header({
+  onNavClick,
+  activeView = 'browse',
+  selectedCount = 0,
+  onOpenQueue,
+}: HeaderProps) {
   return (
     <header
       style={{
         position: 'relative',
-        zIndex: 10,
+        zIndex: 20,
         width: '100%',
-        padding: '24px 20px',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-        background: 'rgba(5, 7, 13, 0.75)',
-        backdropFilter: 'blur(20px)',
+        padding: '18px 24px',
+        borderBottom: '1px solid #141414',
+        background: 'rgba(0, 0, 0, 0.85)',
+        backdropFilter: 'blur(16px)',
       }}
     >
       <div
@@ -27,109 +39,161 @@ export default function Header() {
           gap: '16px',
         }}
       >
-        {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div
+        {/* Brand Logo matching Screenshots */}
+        <div
+          onClick={() => onNavClick && onNavClick('browse')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            cursor: 'pointer',
+          }}
+        >
+          <span
             style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '12px',
-              background: 'linear-gradient(135deg, #00f0ff 0%, #a855f7 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 24px rgba(0, 240, 255, 0.45)',
+              fontSize: '1.45rem',
+              fontWeight: 900,
+              letterSpacing: '-0.02em',
+              color: '#facc15',
+              fontFamily: 'var(--font-main)',
             }}
           >
-            <Sparkles size={22} color="#05070d" strokeWidth={2.5} />
-          </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h1
-                style={{
-                  fontSize: '1.45rem',
-                  fontWeight: 800,
-                  letterSpacing: '-0.02em',
-                  background: 'linear-gradient(90deg, #ffffff 30%, #00f0ff 70%, #a855f7 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Wall-the-Heaven
-              </h1>
-              <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
-                v1.0
-              </span>
-            </div>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-              Ethereal Multi-Source Wallpaper Downloader
-            </p>
-          </div>
+            Wall-the-Heaven
+          </span>
+          <span
+            style={{
+              border: '1px solid rgba(250, 204, 21, 0.4)',
+              color: '#facc15',
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              padding: '2px 7px',
+              borderRadius: '999px',
+              background: 'rgba(250, 204, 21, 0.08)',
+            }}
+          >
+            v2.0
+          </span>
         </div>
 
-        {/* Source Status & GitHub link */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-          <div
-            className="glass-panel"
+        {/* Center Navigation Links (matching screenshot) */}
+        <nav
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '24px',
+            fontSize: '0.84rem',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => onNavClick && onNavClick('browse')}
             style={{
-              padding: '6px 12px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '0.78rem',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: activeView === 'browse' ? '#facc15' : '#888888',
+              borderBottom: activeView === 'browse' ? '2px solid #facc15' : '2px solid transparent',
+              paddingBottom: '4px',
+              fontWeight: 700,
+              transition: 'color 0.15s',
             }}
           >
-            <span
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#10b981',
-                boxShadow: '0 0 8px #10b981',
-              }}
-            />
-            <span style={{ color: 'var(--text-secondary)' }}>AlphaCoders Abyss</span>
-          </div>
+            BROWSE
+          </button>
 
-          <div
-            className="glass-panel"
+          <button
+            type="button"
+            onClick={() => onNavClick && onNavClick('collections')}
             style={{
-              padding: '6px 12px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '0.78rem',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: activeView === 'collections' ? '#facc15' : '#888888',
+              borderBottom: activeView === 'collections' ? '2px solid #facc15' : '2px solid transparent',
+              paddingBottom: '4px',
+              fontWeight: 700,
+              transition: 'color 0.15s',
             }}
           >
-            <span
+            COLLECTIONS
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onNavClick && onNavClick('about')}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: activeView === 'about' ? '#facc15' : '#888888',
+              borderBottom: activeView === 'about' ? '2px solid #facc15' : '2px solid transparent',
+              paddingBottom: '4px',
+              fontWeight: 700,
+              transition: 'color 0.15s',
+            }}
+          >
+            ABOUT
+          </button>
+        </nav>
+
+        {/* Right Action buttons */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          {selectedCount > 0 && onOpenQueue && (
+            <button
+              type="button"
+              onClick={onOpenQueue}
               style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#00f0ff',
-                boxShadow: '0 0 8px #00f0ff',
+                background: 'rgba(250, 204, 21, 0.1)',
+                border: '1px solid #facc15',
+                color: '#facc15',
+                fontSize: '0.78rem',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                padding: '7px 14px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                letterSpacing: '0.04em',
               }}
-            />
-            <span style={{ color: 'var(--text-secondary)' }}>Wallhaven API</span>
-          </div>
+            >
+              <FolderDown size={15} />
+              <span>PACK QUEUE ({selectedCount})</span>
+            </button>
+          )}
 
           <a
             href="https://github.com/Md-Saim/Wall-The-Heaven"
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-panel-interactive"
             style={{
-              display: 'inline-flex',
+              background: '#0d0d0d',
+              border: '1px solid #222222',
+              borderRadius: '4px',
+              padding: '7px 12px',
+              display: 'flex',
               alignItems: 'center',
-              gap: '8px',
-              padding: '8px 16px',
+              gap: '6px',
+              color: '#cccccc',
               textDecoration: 'none',
-              color: 'var(--text-primary)',
-              fontSize: '0.84rem',
+              fontSize: '0.78rem',
               fontWeight: 600,
+              transition: 'border-color 0.15s, color 0.15s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#facc15';
+              e.currentTarget.style.color = '#ffffff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = '#222222';
+              e.currentTarget.style.color = '#cccccc';
             }}
           >
-            <Github size={16} />
+            <Github size={15} />
             <span>GitHub</span>
           </a>
         </div>

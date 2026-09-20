@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { X, Download, Monitor, Smartphone, ExternalLink, Sparkles } from 'lucide-react';
+import { X, Download, Monitor, Smartphone } from 'lucide-react';
 import { WallpaperItem } from '../api/search/route';
 
 interface LightboxModalProps {
@@ -34,18 +34,16 @@ export default function LightboxModal({
         position: 'fixed',
         inset: 0,
         zIndex: 50,
-        background: 'rgba(3, 4, 8, 0.88)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
+        background: 'rgba(0, 0, 0, 0.94)',
+        backdropFilter: 'blur(20px)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '24px',
-        animation: 'fadeIn 0.2s ease',
+        padding: '20px',
       }}
     >
-      {/* Top Bar */}
+      {/* Header bar */}
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -57,53 +55,68 @@ export default function LightboxModal({
           marginBottom: '16px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           <span
-            className={isMobile ? 'badge badge-violet' : 'badge badge-cyan'}
-            style={{ fontSize: '0.75rem', padding: '4px 10px' }}
+            style={{
+              background: 'rgba(250, 204, 21, 0.15)',
+              border: '1px solid #facc15',
+              color: '#facc15',
+              fontSize: '0.72rem',
+              fontWeight: 800,
+              padding: '3px 8px',
+              borderRadius: '3px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              textTransform: 'uppercase',
+            }}
           >
-            {isMobile ? <Smartphone size={13} /> : <Monitor size={13} />}
-            <span>{isMobile ? 'Mobile' : 'Desktop'}</span>
+            {isMobile ? <Smartphone size={12} /> : <Monitor size={12} />}
+            <span>{isMobile ? 'Mobile 9:16' : 'Desktop 16:9'}</span>
           </span>
 
-          <span className="badge badge-muted">{item.resolutionStr}</span>
-          <span className="badge badge-amber">{item.source}</span>
+          <span
+            style={{
+              background: '#141414',
+              border: '1px solid #2e2e2e',
+              color: '#e5e5e5',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              padding: '3px 8px',
+              borderRadius: '3px',
+              fontFamily: 'var(--font-mono)',
+            }}
+          >
+            {item.resolutionStr}
+          </span>
+
+          <span style={{ fontSize: '0.8rem', color: '#888888', textTransform: 'uppercase' }}>
+            {item.source}
+          </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {/* Direct Download Button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Download Button */}
           <button
             type="button"
             onClick={() => onDownload(item)}
-            style={{
-              background: 'linear-gradient(135deg, #00f0ff 0%, #0284c7 100%)',
-              color: '#05070d',
-              border: 'none',
-              borderRadius: 'var(--radius-full)',
-              padding: '8px 20px',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              boxShadow: '0 0 20px rgba(0, 240, 255, 0.4)',
-            }}
+            className="btn-yellow-primary"
+            style={{ padding: '8px 18px', fontSize: '0.84rem' }}
           >
-            <Download size={16} strokeWidth={2.5} />
-            <span>Download</span>
+            <Download size={16} strokeWidth={3} />
+            <span>DOWNLOAD</span>
           </button>
 
-          {/* Close */}
+          {/* Close Button */}
           <button
             type="button"
             onClick={onClose}
             style={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '50%',
-              width: '38px',
-              height: '38px',
+              background: '#141414',
+              border: '1px solid #282828',
+              borderRadius: '4px',
+              width: '36px',
+              height: '36px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -111,25 +124,26 @@ export default function LightboxModal({
               cursor: 'pointer',
             }}
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
       </div>
 
-      {/* Main Image View */}
+      {/* Main Image container */}
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
           position: 'relative',
           maxWidth: '1200px',
-          maxHeight: 'calc(100vh - 140px)',
+          maxHeight: 'calc(100vh - 130px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: 'var(--radius-md)',
+          border: '1px solid rgba(250, 204, 21, 0.4)',
+          borderRadius: '4px',
           overflow: 'hidden',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 240, 255, 0.15)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          background: '#0a0a0a',
+          boxShadow: '0 0 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(250, 204, 21, 0.15)',
         }}
       >
         <img
@@ -143,9 +157,9 @@ export default function LightboxModal({
           }}
           style={{
             maxWidth: '100%',
-            maxHeight: 'calc(100vh - 140px)',
+            maxHeight: 'calc(100vh - 130px)',
             objectFit: 'contain',
-            borderRadius: 'var(--radius-md)',
+            display: 'block',
           }}
         />
       </div>

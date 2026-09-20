@@ -3,7 +3,7 @@
 import React from 'react';
 import WallpaperCard from './WallpaperCard';
 import { WallpaperItem } from '../api/search/route';
-import { CheckSquare, Square, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { CheckSquare, Square, Image as ImageIcon } from 'lucide-react';
 
 interface WallpaperGridProps {
   items: WallpaperItem[];
@@ -15,6 +15,7 @@ interface WallpaperGridProps {
   onSingleDownload: (item: WallpaperItem) => void;
   isLoading: boolean;
   query: string;
+  device: 'desktop' | 'mobile' | 'all';
 }
 
 export default function WallpaperGrid({
@@ -27,8 +28,10 @@ export default function WallpaperGrid({
   onSingleDownload,
   isLoading,
   query,
+  device,
 }: WallpaperGridProps) {
   const allSelected = items.length > 0 && selectedItems.length === items.length;
+  const isMobileView = device === 'mobile';
 
   return (
     <section
@@ -37,7 +40,7 @@ export default function WallpaperGrid({
         zIndex: 10,
         maxWidth: '1360px',
         margin: '0 auto',
-        padding: '20px 20px 100px',
+        padding: '10px 20px 100px',
       }}
     >
       {/* Top Controls Bar */}
@@ -49,17 +52,27 @@ export default function WallpaperGrid({
           flexWrap: 'wrap',
           gap: '12px',
           marginBottom: '20px',
-          paddingBottom: '14px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+          paddingBottom: '12px',
+          borderBottom: '1px solid #1a1a1a',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>
-            {isLoading ? 'Searching...' : `Found ${items.length} Wallpapers`}
+          <span style={{ fontSize: '1rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            {isLoading ? 'SEARCHING ARCHIVES...' : `${items.length} WALLPAPERS DISCOVERED`}
           </span>
           {query && (
-            <span className="badge badge-cyan" style={{ fontSize: '0.72rem' }}>
-              &quot;{query}&quot;
+            <span
+              style={{
+                background: 'rgba(250, 204, 21, 0.1)',
+                border: '1px solid rgba(250, 204, 21, 0.3)',
+                color: '#facc15',
+                fontSize: '0.74rem',
+                fontWeight: 700,
+                padding: '2px 8px',
+                borderRadius: '3px',
+              }}
+            >
+              {query.toUpperCase()}
             </span>
           )}
         </div>
@@ -73,19 +86,29 @@ export default function WallpaperGrid({
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid var(--border-subtle)',
-                color: 'var(--text-secondary)',
-                borderRadius: 'var(--radius-sm)',
+                background: '#0d0d0d',
+                border: '1px solid #282828',
+                color: '#cccccc',
+                borderRadius: '4px',
                 padding: '6px 14px',
-                fontSize: '0.82rem',
-                fontWeight: 600,
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.04em',
                 cursor: 'pointer',
                 transition: 'all 0.15s',
               }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#facc15';
+                e.currentTarget.style.color = '#ffffff';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#282828';
+                e.currentTarget.style.color = '#cccccc';
+              }}
             >
-              {allSelected ? <CheckSquare size={16} color="#00f0ff" /> : <Square size={16} />}
-              <span>{allSelected ? 'Deselect All' : 'Select All'}</span>
+              {allSelected ? <CheckSquare size={16} color="#facc15" /> : <Square size={16} />}
+              <span>{allSelected ? 'DESELECT ALL' : 'SELECT ALL'}</span>
             </button>
           </div>
         )}
@@ -96,17 +119,19 @@ export default function WallpaperGrid({
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: isMobileView
+              ? 'repeat(auto-fill, minmax(180px, 1fr))'
+              : 'repeat(auto-fill, minmax(280px, 1fr))',
             gap: '20px',
           }}
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="glass-panel skeleton-shimmer"
+              className="hardcore-card skeleton-shimmer"
               style={{
-                borderRadius: 'var(--radius-md)',
-                aspectRatio: '16 / 9',
+                aspectRatio: isMobileView ? '9 / 14' : '16 / 9',
+                borderRadius: '6px',
               }}
             />
           ))}
@@ -116,11 +141,11 @@ export default function WallpaperGrid({
       {/* Empty State */}
       {!isLoading && items.length === 0 && (
         <div
-          className="glass-panel"
+          className="hardcore-card"
           style={{
             textAlign: 'center',
-            padding: '60px 20px',
-            maxWidth: '520px',
+            padding: '70px 20px',
+            maxWidth: '540px',
             margin: '40px auto',
           }}
         >
@@ -129,31 +154,33 @@ export default function WallpaperGrid({
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              background: 'rgba(0, 240, 255, 0.1)',
+              background: 'rgba(250, 204, 21, 0.1)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 16px',
             }}
           >
-            <ImageIcon size={30} color="#00f0ff" />
+            <ImageIcon size={30} color="#facc15" />
           </div>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '8px' }}>
-            No Wallpapers Found
+          <h3 style={{ fontSize: '1.3rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.04em' }}>
+            NO WALLPAPERS FOUND
           </h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '20px' }}>
-            We couldn&apos;t find any wallpapers for &quot;{query}&quot;. Try broader terms like &quot;Cyberpunk&quot;, &quot;Zhongli&quot;, or &quot;Anime&quot;.
+            We couldn&apos;t find any wallpapers for &quot;{query}&quot;. Try gaming terms like &quot;Cyberpunk&quot;, &quot;Elden Ring&quot;, &quot;Zhongli&quot;, or &quot;CS2&quot;.
           </p>
         </div>
       )}
 
-      {/* Actual Results Grid */}
+      {/* Responsive Wallpapers Grid */}
       {!isLoading && items.length > 0 && (
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '22px',
+            gridTemplateColumns: isMobileView
+              ? 'repeat(auto-fill, minmax(190px, 1fr))'
+              : 'repeat(auto-fill, minmax(290px, 1fr))',
+            gap: '20px',
           }}
         >
           {items.map((item) => {
