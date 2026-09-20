@@ -9,7 +9,7 @@ interface SearchBarProps {
   device: 'desktop' | 'mobile' | 'all';
   setDevice: (d: 'desktop' | 'mobile' | 'all') => void;
   minRes: string;
-  setMinRes: (r: string) => void;
+  onResolutionChange: (r: string) => void;
   onSearch: (newQuery?: string, newDevice?: 'desktop' | 'mobile' | 'all') => void;
   isLoading: boolean;
 }
@@ -31,7 +31,7 @@ export default function SearchBar({
   device,
   setDevice,
   minRes,
-  setMinRes,
+  onResolutionChange,
   onSearch,
   isLoading,
 }: SearchBarProps) {
@@ -258,10 +258,7 @@ export default function SearchBar({
               <button
                 key={r.id}
                 type="button"
-                onClick={() => {
-                  setMinRes(r.id);
-                  onSearch(localInput.trim());
-                }}
+                onClick={() => onResolutionChange(r.id)}
                 className={`pill-filter ${minRes === r.id ? 'active' : ''}`}
               >
                 {r.label}

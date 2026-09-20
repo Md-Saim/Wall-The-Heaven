@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
@@ -125,6 +125,31 @@ export default function BrowseView({
     [query, device, minRes]
   );
 
+  // Resolution filtering: instantly filters currently loaded results
+  const displayedItems = useMemo(() => {
+    if (minRes === 'all') return results;
+    return results.filter((item) => {
+      const w = item.width;
+      const h = item.height;
+      const maxDim = Math.max(w, h);
+      const minDim = Math.min(w, h);
+      if (minRes === '4k') {
+        return maxDim >= 3800 || minDim >= 2100 || (w * h >= 3840 * 2160 * 0.85);
+      }
+      if (minRes === '1440p') {
+        return maxDim >= 2500 || minDim >= 1400 || (w * h >= 2560 * 1440 * 0.85);
+      }
+      if (minRes === '1080p') {
+        return maxDim >= 1900 || minDim >= 1050 || (w * h >= 1920 * 1080 * 0.85);
+      }
+      return true;
+    });
+  }, [results, minRes]);
+
+  const handleResolutionChange = (newRes: string) => {
+    setMinRes(newRes);
+  };
+
   // Initial load
   useEffect(() => {
     executeSearch(initialQuery, initialDevice, 'all');
@@ -143,7 +168,7 @@ export default function BrowseView({
   };
 
   const handleSelectAll = () => {
-    setSelectedItems([...results]);
+    setSelectedItems([...displayedItems]);
   };
 
   const handleDeselectAll = () => {
@@ -249,16 +274,13 @@ export default function BrowseView({
               device={device}
               setDevice={setDevice}
               minRes={minRes}
-              setMinRes={(r) => {
-                setMinRes(r);
-                executeSearch(query, device, r);
-              }}
+              onResolutionChange={handleResolutionChange}
               onSearch={(newQuery, newDevice) => executeSearch(newQuery, newDevice, minRes)}
               isLoading={isLoading}
             />
 
             <WallpaperGrid
-              items={results}
+              items={displayedItems}
               selectedItems={selectedItems}
               onToggleSelect={handleToggleSelect}
               onSelectAll={handleSelectAll}
