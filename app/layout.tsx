@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import ClientBody from './components/ClientBody';
 
 export const metadata: Metadata = {
   title: {
@@ -69,6 +70,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+        <link rel="icon" href="/icon-512.png" type="image/png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="google-site-verification" content="NyxxuZvDzjQfi5QXVlSk85QlYypjOJ_GuLKvt54dSS0" />
         <script
           type="application/ld+json"
@@ -105,7 +109,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body><ClientBody>{children}</ClientBody></body>
     </html>
   );
 }

@@ -667,3 +667,60 @@ html, body {
     gap: 6px !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ZIP PAGE TRANSITION ANIMATIONS
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes zipSlideLeft {
+  0% { transform: translateX(-105%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes zipSlideRight {
+  0% { transform: translateX(105%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes zipPullDown {
+  0% {
+    top: -30px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    top: 55%;
+    opacity: 1;
+  }
+}
+
+@keyframes zipPullUp {
+  0% {
+    top: 55%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: -30px;
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(calc(-50% + var(--spark-x, 10px))) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(-50% + var(--spark-x, 10px))) scale(0);
+    opacity: 0;
+  }
+}
