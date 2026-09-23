@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'desktop wallpaper pack',
   ],
   alternates: {
-    canonical: '/browse',
+    canonical: '/',
   },
   openGraph: {
     title: 'Browse & Bulk Download Free 4K Wallpapers | Wall-the-Heaven',
