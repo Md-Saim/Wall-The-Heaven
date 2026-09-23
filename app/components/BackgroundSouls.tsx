@@ -76,7 +76,7 @@ export default function BackgroundSouls() {
         radius: isMobileDevice ? Math.random() * 12 + 6 : Math.random() * 18 + 8,
         vx: (Math.random() - 0.5) * 0.25,
         vy: -(Math.random() * 0.35 + 0.1), // gentle upward drift
-        alpha: Math.random() * 0.25 + 0.15,
+        alpha: Math.random() * 0.3 + 0.25,
         pulseSpeed: Math.random() * 0.015 + 0.01,
         pulseOffset: Math.random() * Math.PI * 2,
         highlightAngle: Math.random() * Math.PI * 2,
@@ -146,7 +146,7 @@ export default function BackgroundSouls() {
       });
 
       // 2. Draw Moving Glassy Bubbles
-      souls.forEach((soul) => {
+      souls.forEach((soul, i) => {
         soul.x += soul.vx;
         soul.y += soul.vy;
 
@@ -171,27 +171,34 @@ export default function BackgroundSouls() {
 
         const pulse = Math.sin(frame * soul.pulseSpeed + soul.pulseOffset);
         const r = soul.radius + pulse * 1.1;
+        const isYellow = i % 5 < 2; // ~40% of bubbles are yellow-tinted
 
         ctx.save();
-        ctx.globalAlpha = soul.alpha + pulse * 0.08;
+        ctx.globalAlpha = soul.alpha + pulse * 0.1;
 
-        // Outer Dark Bubble Glow
+        // Outer Bubble Glow – yellow or dark variant
         const bubbleGrad = ctx.createRadialGradient(
           soul.x, soul.y, r * 0.2,
           soul.x, soul.y, r
         );
-        bubbleGrad.addColorStop(0, 'rgba(25, 25, 25, 0.2)');
-        bubbleGrad.addColorStop(0.7, 'rgba(12, 12, 12, 0.55)');
-        bubbleGrad.addColorStop(1, 'rgba(250, 204, 21, 0.18)');
+        if (isYellow) {
+          bubbleGrad.addColorStop(0, 'rgba(250, 204, 21, 0.18)');
+          bubbleGrad.addColorStop(0.5, 'rgba(202, 138, 4, 0.22)');
+          bubbleGrad.addColorStop(1, 'rgba(250, 204, 21, 0.08)');
+        } else {
+          bubbleGrad.addColorStop(0, 'rgba(30, 30, 30, 0.3)');
+          bubbleGrad.addColorStop(0.7, 'rgba(15, 15, 15, 0.55)');
+          bubbleGrad.addColorStop(1, 'rgba(250, 204, 21, 0.12)');
+        }
 
         ctx.fillStyle = bubbleGrad;
         ctx.beginPath();
         ctx.arc(soul.x, soul.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Golden Rim
-        ctx.strokeStyle = 'rgba(250, 204, 21, 0.22)';
-        ctx.lineWidth = 1;
+        // Golden Rim – stronger on yellow bubbles
+        ctx.strokeStyle = isYellow ? 'rgba(250, 204, 21, 0.35)' : 'rgba(250, 204, 21, 0.25)';
+        ctx.lineWidth = isYellow ? 1.2 : 1;
         ctx.stroke();
 
         // Specular Glint (desktop only for performance)
