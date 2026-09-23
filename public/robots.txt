@@ -1,0 +1,5 @@
+# Wall-the-Heaven Robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://wall-the-heaven.vercel.app/sitemap.xml

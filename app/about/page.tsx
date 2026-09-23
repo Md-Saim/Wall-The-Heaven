@@ -6,20 +6,23 @@ import Footer from '../components/Footer';
 import BackgroundSouls from '../components/BackgroundSouls';
 
 export const metadata: Metadata = {
-  title: 'About Platform & Developer | Wall-the-Heaven',
+  title: 'About Wall-the-Heaven – Bulk Wallpaper Downloader Platform',
   description:
-    'Learn about Wall-the-Heaven, the high-resolution wallpaper discovery platform, and its developer Md-Saim. Built for Gaming, Anime, Cinema, Nature, Ultrawide, and Mobile AMOLED setups.',
+    'Learn about Wall-the-Heaven, the free bulk wallpaper downloader platform. Download 4K, HD wallpapers for desktop and mobile – anime, nature, cyberpunk, gaming & more.',
   keywords: [
     'About Wall-the-Heaven',
+    'bulk wallpaper downloader',
+    'free wallpaper platform',
     'Md-Saim developer',
-    'Md-Saim GitHub',
+    '4K wallpaper app',
     'wallpaper discovery platform',
-    'Next.js wallpaper app',
-    'pure black wallpaper downloader',
   ],
+  alternates: {
+    canonical: '/about',
+  },
   openGraph: {
-    title: 'About Wall-the-Heaven | Platform & Developer Md-Saim',
-    description: 'High-res wallpaper discovery engine designed with zero bloat and in-memory batch ZIP packaging.',
+    title: 'About Wall-the-Heaven – Bulk Wallpaper Downloader Platform',
+    description: 'Learn about Wall-the-Heaven, the free bulk wallpaper downloader for 4K desktop and mobile wallpapers.',
     url: 'https://wall-the-heaven.vercel.app/about',
     siteName: 'Wall-the-Heaven',
     type: 'website',

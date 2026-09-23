@@ -197,7 +197,7 @@ export default function Footer() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', boxShadow: '0 0 8px #22c55e' }} />
-          <span style={{ color: '#cccccc', fontWeight: 600 }}>System Operational • Vercel Edge</span>
+          <span style={{ color: '#cccccc', fontWeight: 600 }}>System Operational • Wall-the-Heaven</span>
         </div>
       </div>
     </footer>

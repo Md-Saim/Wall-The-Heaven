@@ -2,31 +2,35 @@ import type { Metadata } from 'next';
 import BrowseView from '../components/BrowseView';
 
 export const metadata: Metadata = {
-  title: 'Browse Wallpapers | Wall-the-Heaven - 4K Desktop & Mobile Gallery',
+  title: 'Browse & Download Wallpapers in Bulk – 4K HD Gallery',
   description:
-    'Explore high-resolution Gaming, Anime, Movies, Nature, Space & Mobile wallpapers. Filter by 16:9 Desktop landscape or 9:16 AMOLED Mobile portrait ratios with instant 1-click batch ZIP pack downloads.',
+    'Browse and bulk download free 4K, HD wallpapers for desktop and mobile. Filter anime, nature, cyberpunk, gaming wallpapers and download them all at once with Wall-the-Heaven.',
   keywords: [
     'browse wallpapers',
-    'anime wallpapers',
-    'game wallpapers gallery',
-    '4K PC wallpapers',
-    'nature wallpapers',
-    'movie wallpapers',
-    'phone lockscreens',
-    '3840x2160 ultra hd',
-    'Wall-the-Heaven browse',
+    'bulk wallpaper downloader',
+    'download wallpapers in bulk',
+    '4K wallpapers gallery',
+    'free HD wallpapers',
+    'anime wallpapers download',
+    'gaming wallpapers bulk',
+    'nature wallpapers free',
+    'mobile wallpapers download',
+    'desktop wallpaper pack',
   ],
+  alternates: {
+    canonical: '/browse',
+  },
   openGraph: {
-    title: 'Browse High-Res Wallpapers | Wall-the-Heaven',
-    description: 'Filter by Desktop (16:9) or Mobile (9:16) with instant batch ZIP packaging. Pure black aesthetic.',
+    title: 'Browse & Bulk Download Free 4K Wallpapers | Wall-the-Heaven',
+    description: 'Browse thousands of free 4K, HD wallpapers. Filter by category and bulk download for desktop & mobile.',
     url: 'https://wall-the-heaven.vercel.app/browse',
     siteName: 'Wall-the-Heaven',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Browse Wallpapers | Wall-the-Heaven',
-    description: 'Discover ultra clean, pure black high-res PC & mobile wallpapers.',
+    title: 'Browse & Bulk Download Free 4K Wallpapers | Wall-the-Heaven',
+    description: 'Browse thousands of free 4K, HD wallpapers. Filter and bulk download for desktop & mobile.',
   },
 };
 

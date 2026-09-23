@@ -6,20 +6,22 @@ import Footer from '../components/Footer';
 import BackgroundSouls from '../components/BackgroundSouls';
 
 export const metadata: Metadata = {
-  title: 'Legal & Usage Disclaimer | Wall-the-Heaven',
+  title: 'Disclaimer & How It Works – Wall-the-Heaven',
   description:
-    'Understand how Wall-the-Heaven works, who it is built for, and our fair use & copyright disclaimers. Ephemeral in-memory streaming with zero server image storage.',
+    'Understand how Wall-the-Heaven bulk wallpaper downloader works, fair use policy, and copyright disclaimers. Free 4K wallpaper downloads with zero server storage.',
   keywords: [
     'Wall-the-Heaven disclaimer',
-    'how it works',
-    'who is it for',
-    'copyright policy',
+    'bulk wallpaper downloader how it works',
+    'copyright policy wallpapers',
     'fair use wallpaper downloader',
-    'ephemeral in-memory sessions',
+    'free wallpaper download legal',
   ],
+  alternates: {
+    canonical: '/disclaimer',
+  },
   openGraph: {
-    title: 'Legal & Usage Disclaimer | Wall-the-Heaven',
-    description: 'Learn how Wall-the-Heaven functions as an ephemeral, in-browser wallpaper discovery tool.',
+    title: 'Disclaimer & How It Works – Wall-the-Heaven',
+    description: 'Learn how Wall-the-Heaven bulk wallpaper downloader works and our fair use policy.',
     url: 'https://wall-the-heaven.vercel.app/disclaimer',
     siteName: 'Wall-the-Heaven',
     type: 'website',
